@@ -10,10 +10,10 @@ public interface DeptDao {
     
     int update(Dept dept);
     
-    int delete(Integer id);
+    int delete(String id);
     
     List<Dept> findAll();
     
-    List<Dept> findById(Integer id);
+    Dept findById(String id);
     
 }

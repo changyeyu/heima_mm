@@ -1,10 +1,12 @@
 package com.itheima.mm.web.controller;
 
-
 import com.github.pagehelper.PageInfo;
 import com.itheima.mm.domain.system.Dept;
+import com.itheima.mm.domain.system.User;
 import com.itheima.mm.service.system.DeptService;
+import com.itheima.mm.service.system.UserService;
 import com.itheima.mm.service.system.impl.DeptServiceImpl;
+import com.itheima.mm.service.system.impl.UserServiceImpl;
 import com.itheima.mm.util.BeanUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,13 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/system/dept")
-public class DeptServlet extends BaseServlet {
-    
-    private DeptService service = new DeptServiceImpl();
+@WebServlet("/system/user")
+public class UserServlet extends BaseServlet {
+    private UserService service = new UserServiceImpl();
     
     private void list(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        
         int page = 1;
         int size = 5;
         String pageStr = request.getParameter("page");
@@ -35,19 +35,19 @@ public class DeptServlet extends BaseServlet {
         PageInfo pageInfo = service.findAll(page, size);
         request.setAttribute("page", pageInfo);
         
-        request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/pages/system/dept/list.jsp").forward(request, response);
+        request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/pages/system/user/list.jsp").forward(request, response);
     }
     
     
     private void toAdd(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        List<Dept> list = service.findAll();
-        request.setAttribute("deptList", list);
-        request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/pages/system/dept/add.jsp").forward(request, response);
+        List<User> list = service.findAll();
+        request.setAttribute("userList", list);
+        request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/pages/system/user/add.jsp").forward(request, response);
     }
     
     private void save(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Dept dept = BeanUtil.fillBean(request, Dept.class, "yyyy-MM-dd");
-        service.save(dept);
+        User user = BeanUtil.fillBean(request, User.class, "yyyy-MM-dd");
+        service.save(user);
         list(request, response);
     }
     
@@ -55,17 +55,19 @@ public class DeptServlet extends BaseServlet {
     private void toEdit(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String id = request.getParameter("id");
         String page = request.getParameter("page");
-        Dept dept = service.findById(id);
-        List<Dept> list = service.findAll();
+        User user = service.findById(id);
+        DeptService deptService = new DeptServiceImpl();
+        List<Dept> list = deptService.findAll();
+        
+        request.setAttribute("user", user);
         request.setAttribute("deptList", list);
-        request.setAttribute("dept", dept);
         request.setAttribute("page", page);
-        request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/pages/system/dept/update.jsp").forward(request, response);
+        request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/pages/system/user/update.jsp").forward(request, response);
     }
     
     private void edit(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Dept dept = BeanUtil.fillBean(request, Dept.class, "yyyy-MM-dd");
-        service.update(dept);
+        User user = BeanUtil.fillBean(request, User.class, "yyyy-MM-dd");
+        service.update(user);
         list(request, response);
     }
     

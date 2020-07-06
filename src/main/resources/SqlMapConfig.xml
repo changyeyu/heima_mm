@@ -6,8 +6,9 @@
 <configuration>
     <!--定义property的配置-->
     <properties resource="jdbc.properties"></properties>
-
-
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
     <!--配置别名:别名配置是给实体类用的，不能用在dao上-->
     <typeAliases>
         <!--指定实体类所在的包，此时包下所有类都会注册别名，别名就是类名称-->

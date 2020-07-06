@@ -6,8 +6,10 @@ import com.itheima.mm.dao.system.DeptDao;
 import com.itheima.mm.domain.system.Dept;
 import com.itheima.mm.service.system.DeptService;
 import com.itheima.mm.util.DaoInstanceUtil;
+import org.apache.ibatis.annotations.Delete;
 
 import java.util.List;
+import java.util.UUID;
 
 public class DeptServiceImpl implements DeptService {
     
@@ -15,6 +17,7 @@ public class DeptServiceImpl implements DeptService {
     
     @Override
     public int save(Dept dept) {
+        dept.setId(UUID.randomUUID().toString());
         return mapper.save(dept);
     }
     
@@ -24,7 +27,7 @@ public class DeptServiceImpl implements DeptService {
     }
     
     @Override
-    public int delete(Integer id) {
+    public int delete(String id) {
         return mapper.delete(id);
     }
     
@@ -34,10 +37,11 @@ public class DeptServiceImpl implements DeptService {
     }
     
     @Override
-    public List<Dept> findById(Integer id) {
+    public Dept findById(String id) {
         return mapper.findById(id);
     }
     
+    @Override()
     public PageInfo findAll(int page, int size) {
         PageHelper.startPage(page, size);
         List<Dept> list = mapper.findAll();

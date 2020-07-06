@@ -55,7 +55,6 @@ public class CompanyServlet extends BaseServlet {
     }
     
     private void edit(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        
         Company company = BeanUtil.fillBean(request, Company.class, "yyyy-MM-dd");
         service.update(company);
         list(request, response);

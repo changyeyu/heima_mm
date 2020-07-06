@@ -16,20 +16,30 @@
 </head>
 <script>
     function deleteById() {
-        var id = getCheckId()
-        if(id) {
-            if(confirm("你确认要删除此条记录吗？")) {
-                location.href="${ctx}/system/user?operation=delete&id="+id;
+        var id = getCheckId();
+        if(id.length >= 1) {
+            if(confirm("确认要删除选中的记录吗？")) {
+                var idStr = "";
+                if (id.length == 1){
+                    idStr = id[0].value;
+                } else {
+                    for (let i = 0; i < id.length - 1; i++) {
+                        idStr += id[i].value + "_";
+                    }
+                    idStr += id[id.length - 1].value;
+                }
+                var currentPage = $(".active a").html();
+                location.href="${ctx}/system/dept?operation=delete&id=" + idStr + "&page=" + currentPage;
             }
-        }else{
-            alert("请勾选待处理的记录，且每次只能勾选一个")
+        } else {
+            alert("请勾选待处理的记录");
         }
     }
 
     function roleList() {
-        var id = getCheckId()
-        if(id) {
-            location.href="${ctx}/system/user?operation=userRoleList&id="+id;
+        var id = getCheckId();
+        if(id.length == 1) {
+            location.href="${ctx}/system/user?operation=userRoleList&id="+id[0].value;
         }else{
             alert("请勾选待处理的记录，且每次只能勾选一个")
         }
@@ -91,7 +101,7 @@
                         <td>${item.dept.deptName }</td>
                         <td>${item.state  ==0?'停用':'启用'}</td>
                         <th class="text-center">
-                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="${ctx}/system/user?operation=toEdit&id=${item.id}"'>编辑</button>
+                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="${ctx}/system/user?operation=toEdit&id=${item.id}&page=${page.pageNum}"'>编辑</button>
                         </th>
                     </tr>
                     </c:forEach>

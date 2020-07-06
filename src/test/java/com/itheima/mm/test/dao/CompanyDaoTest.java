@@ -1,13 +1,9 @@
 package com.itheima.mm.test.dao;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.itheima.mm.dao.store.CompanyDao;
 import com.itheima.mm.domain.store.Company;
 import com.itheima.mm.factory.MapperFactory;
-import com.itheima.mm.service.store.CompanyService;
-import com.itheima.mm.service.store.impl.CompanyServiceImpl;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

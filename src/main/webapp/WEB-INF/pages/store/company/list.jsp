@@ -22,7 +22,6 @@
         if(id.length >= 1) {
             if(confirm("确认要删除选中的记录吗？")) {
                 var idStr = "";
-
                 if (id.length == 1){
                     idStr = id[0].value;
                 } else {

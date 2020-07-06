@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itheima.dao.system.UserDao">
+<mapper namespace="com.itheima.mm.dao.system.UserDao">
     <!--配置实体类属性和数据库表中列的对应关系-->
-    <resultMap id="BaseResultMap" type="com.itheima.domain.system.User">
+    <resultMap id="BaseResultMap" type="user">
         <id column="user_id" jdbcType="VARCHAR" property="id"/>
         <result column="email" jdbcType="VARCHAR" property="email"/>
         <result column="user_name" jdbcType="VARCHAR" property="userName"/>
@@ -13,12 +13,7 @@
         <result column="birthday" jdbcType="VARCHAR" property="birthday"/>
         <result column="join_date" jdbcType="VARCHAR" property="joinDate"/>
         <result column="dept_id" jdbcType="VARCHAR" property="deptId"/>
-        <association
-            property=""
-            column="dept_id"
-            javaType="com.itheima.domain.system.Dept"
-            select="com.itheima.dao.system.DeptDao.findById"
-            />
+        <association property="dept" column="dept_id" javaType="dept" select="com.itheima.mm.dao.system.DeptDao.findById"></association>
     </resultMap>
 
     <!--配置查询的列名公共SQL语句-->
@@ -48,7 +43,7 @@
     </delete>
 
     <!--配置全字段插入，当某个字段没有值时，插入null-->
-    <insert id="save" parameterType="com.itheima.domain.system.User">
+    <insert id="save" parameterType="user">
         insert into ss_user (user_id, email, user_name,  password, state,
         gender, telephone, birthday, join_date, dept_id
         )
@@ -60,16 +55,14 @@
     </insert>
 
     <!--配置全字段更新，当提供的数据为null时，数据库数据会被更新为null-->
-    <update id="update" parameterType="com.itheima.domain.system.User">
+    <update id="update" parameterType="user">
         update ss_user
         set email = #{email,jdbcType=VARCHAR},
         user_name = #{userName,jdbcType=VARCHAR},
-        password = #{password,jdbcType=VARCHAR},
         state = #{state,jdbcType=DECIMAL},
         gender = #{gender,jdbcType=CHAR},
         telephone = #{telephone,jdbcType=VARCHAR},
         birthday = #{birthday,jdbcType=VARCHAR},
-        join_date = #{joinDate,jdbcType=VARCHAR},
         dept_id = #{deptId,jdbcType=VARCHAR}
         where user_id = #{id,jdbcType=VARCHAR}
     </update>

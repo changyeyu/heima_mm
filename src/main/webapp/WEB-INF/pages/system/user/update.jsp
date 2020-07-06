@@ -47,10 +47,6 @@
                         <input type="text" class="form-control" placeholder="邮箱" name="email" value="${user.email}">
                     </div>
 
-                    <div class="col-md-2 title">密码</div>
-                    <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="密码" name="password" value="${user.password}">
-                    </div>
 
                     <div class="col-md-2 title">姓名</div>
                     <div class="col-md-4 data">
@@ -99,16 +95,7 @@
                         <input type="text" class="form-control" placeholder="电话" name="telephone" value="${user.telephone}">
                     </div>
 
-                    <div class="col-md-2 title">入职日期</div>
-                    <div class="col-md-4 data">
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            <input type="text" placeholder="入职时间"  name="joinDate" class="form-control pull-right"
-                                   value="<fmt:formatDate value="${user.joinDate}" pattern="yyyy-MM-dd"/>" id="2">
-                        </div>
-                    </div>
+
                 </div>
             </form>
         </div>
