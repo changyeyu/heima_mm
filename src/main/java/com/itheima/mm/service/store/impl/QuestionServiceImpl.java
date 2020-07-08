@@ -16,16 +16,30 @@ public class QuestionServiceImpl implements QuestionService {
     private QuestionDao mapper = DaoInstanceUtil.getMapper(QuestionDao.class);
     
     @Override
-    public void save(Question question) {
+    public String save(Question question, boolean flag) {
+        String pictureName = null;
         String id = UUID.randomUUID().toString();
         question.setId(id);
+        question.setReviewStatus("0");
         question.setCreateTime(new Date());
+        
+        if (flag){
+            pictureName = id + new Date().getTime();
+            question.setPicture(pictureName);
+        }
         mapper.save(question);
+        return pictureName;
     }
     
     @Override
-    public void update(Question question) {
+    public String update(Question question, boolean flag) {
+        String pictureName = null;
+        if (flag){
+            pictureName = question.getId() + new Date().getTime();
+            question.setPicture(pictureName);
+        }
         mapper.update(question);
+        return pictureName;
     }
     
     @Override

@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface QuestionService {
     
-    void save(Question question);
+    String save(Question question, boolean flag);
     
-    void update(Question question);
+    String update(Question question, boolean flag);
     
     void delete(String id);
     
