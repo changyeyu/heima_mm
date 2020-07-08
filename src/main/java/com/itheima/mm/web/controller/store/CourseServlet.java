@@ -1,10 +1,11 @@
-package com.itheima.mm.web.controller;
+package com.itheima.mm.web.controller.store;
 
 import com.github.pagehelper.PageInfo;
-import com.itheima.mm.domain.store.Company;
-import com.itheima.mm.service.store.CompanyService;
-import com.itheima.mm.service.store.impl.CompanyServiceImpl;
+import com.itheima.mm.domain.store.Course;
+import com.itheima.mm.service.store.CourseService;
+import com.itheima.mm.service.store.impl.CourseServiceImpl;
 import com.itheima.mm.util.BeanUtil;
+import com.itheima.mm.web.controller.BaseServlet;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
@@ -13,10 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/store/company")
-public class CompanyServlet extends BaseServlet {
+@WebServlet("/store/course")
+public class CourseServlet extends BaseServlet {
     
-    private CompanyService service = new CompanyServiceImpl();
+    private CourseService service = new CourseServiceImpl();
     
     private void list(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String page = request.getParameter("page");
@@ -30,17 +31,17 @@ public class CompanyServlet extends BaseServlet {
         PageInfo pageInfo = service.findAll(Integer.parseInt(page), Integer.parseInt(size));
         request.setAttribute("page", pageInfo);
         
-        request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/pages/store/company/list.jsp").forward(request, response);
+        request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/pages/store/course/list.jsp").forward(request, response);
     }
     
     
     private void toAdd(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/pages/store/company/add.jsp").forward(request, response);
+        request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/pages/store/course/add.jsp").forward(request, response);
     }
     
     private void save(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Company company = BeanUtil.fillBean(request, Company.class, "yyyy-MM-dd");
-        service.save(company);
+        Course course = BeanUtil.fillBean(request, Course.class, "yyyy-MM-dd");
+        service.save(course);
         list(request, response);
     }
     
@@ -48,15 +49,15 @@ public class CompanyServlet extends BaseServlet {
     private void toEdit(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String id = request.getParameter("id");
         String page = request.getParameter("page");
-        Company company = service.findById(id);
-        request.setAttribute("company", company);
+        Course course = service.findById(id);
+        request.setAttribute("course", course);
         request.setAttribute("page", page);
-        request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/pages/store/company/update.jsp").forward(request, response);
+        request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/pages/store/course/update.jsp").forward(request, response);
     }
     
     private void edit(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Company company = BeanUtil.fillBean(request, Company.class, "yyyy-MM-dd");
-        service.update(company);
+        Course course = BeanUtil.fillBean(request, Course.class, "yyyy-MM-dd");
+        service.update(course);
         list(request, response);
     }
     
