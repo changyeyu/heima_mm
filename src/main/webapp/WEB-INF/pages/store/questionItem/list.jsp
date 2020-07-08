@@ -49,8 +49,8 @@
         <div class="panel panel-default">
             <div class="panel-heading">新增选项</div>
             <form id="editForm" action="${ctx}/store/questionItem?operation=saveOrUpdate" method="post">
-                <input type="hidden" name="questionId" value="${questionId}">
-                <input type="hidden" name="id" value="${questionItem.id}">
+                <input type="text" name="questionId" value="${questionId}">
+                <input type="text" name="id" value="${questionItem.id}">
                 <div class="row data-type" style="margin: 0px">
 
                     <div class="col-md-2 title">选项内容</div>

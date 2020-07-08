@@ -12,6 +12,7 @@ import com.itheima.mm.util.BeanUtil;
 import com.itheima.mm.web.controller.BaseServlet;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUpload;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang3.StringUtils;
@@ -72,7 +73,7 @@ public class QuestionServlet extends BaseServlet {
             Question question = BeanUtil.fillBean(list, Question.class);
             //调用service层方法返回数据库存放的图片名
             String pictureName = service.save(question, flag);
-            if (pictureName != null) {
+            if (flag) {
                 for (FileItem fileItem : list) {
                     if (!fileItem.isFormField()) {
                         String realPath = request.getServletContext().getRealPath("/upload");
@@ -102,10 +103,30 @@ public class QuestionServlet extends BaseServlet {
         request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/pages/store/question/update.jsp").forward(request, response);
     }
     
-    private void edit(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    private void edit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         
-        Question question = BeanUtil.fillBean(request, Question.class, "yyyy-MM-dd");
-//        service.update(question, );
+        FileUpload fileUpload = new FileUpload(new DiskFileItemFactory());
+        //获取表单中所有字段
+        List<FileItem> list = fileUpload.parseRequest(request);
+        boolean flag = false;
+        for (FileItem item : list) {
+            if (StringUtils.isNotBlank(item.getName())) {
+                flag = true;
+                break;
+            }
+        }
+        //有文件上传
+        Question question = BeanUtil.fillBean(list, Question.class);
+        
+        String pictureName = service.update(question, flag);
+        if (flag) {
+            for (FileItem fileItem : list) {
+                if (!fileItem.isFormField()) {
+                    String realPath = request.getServletContext().getRealPath("/upload");
+                    fileItem.write(new File(realPath + "/" + pictureName));
+                }
+            }
+        }
         list(request, response);
     }
     

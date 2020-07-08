@@ -73,7 +73,7 @@
                                 <c:if test="${question.picture.length() > 0}">
                                     <div class="col-md-2 title">题干图片</div>
                                     <div class="col-md-10 data ">
-                                        <img src="${ctx}/upload/${question.picture}"/>
+                                        <img src="${ctx}/upload/${question.picture}" width="500" height="50"/>
                                     </div>
                                 </c:if>
 

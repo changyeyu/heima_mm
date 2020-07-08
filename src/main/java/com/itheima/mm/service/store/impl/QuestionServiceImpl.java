@@ -23,7 +23,7 @@ public class QuestionServiceImpl implements QuestionService {
         question.setReviewStatus("0");
         question.setCreateTime(new Date());
         
-        if (flag){
+        if (flag) {
             pictureName = id + new Date().getTime();
             question.setPicture(pictureName);
         }
@@ -33,8 +33,10 @@ public class QuestionServiceImpl implements QuestionService {
     
     @Override
     public String update(Question question, boolean flag) {
+        
         String pictureName = null;
-        if (flag){
+        
+        if (flag) {
             pictureName = question.getId() + new Date().getTime();
             question.setPicture(pictureName);
         }
