@@ -37,19 +37,19 @@ public class CompanyDaoTest {
         mapper.findById("ss");
     }
     
-    @Test
-    public void testSave(){
-        Company company = new Company();
-        company.setId("sasa");
-        mapper.save(company);
-    }
+//    @Test
+//    public void testSave(){
+//        Company company = new Company();
+//        company.setId("sasa");
+//        mapper.save(company);
+//    }
     
-    @Test
-    public void testUpdate(){
-        Company company = new Company();
-        company.setId("sasa");
-        mapper.update(company);
-    }
+//    @Test
+//    public void testUpdate(){
+//        Company company = new Company();
+//        company.setId("sasa");
+//        mapper.update(company);
+//    }
     
     @Test
     public void testDelete(){

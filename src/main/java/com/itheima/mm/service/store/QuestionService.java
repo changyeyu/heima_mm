@@ -3,6 +3,7 @@ package com.itheima.mm.service.store;
 import com.github.pagehelper.PageInfo;
 import com.itheima.mm.domain.store.Question;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public interface QuestionService {
@@ -18,4 +19,6 @@ public interface QuestionService {
     Question findById(String id);
  
     PageInfo findAll(int page, int size);
+    
+    ByteArrayOutputStream getReport() throws Exception;
 }

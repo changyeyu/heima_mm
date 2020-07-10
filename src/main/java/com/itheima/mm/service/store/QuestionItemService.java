@@ -18,4 +18,6 @@ public interface QuestionItemService {
     QuestionItem findById(String id);
  
     PageInfo findAll(String questionId, int page, int size);
+    
+    void deleteByQuestionId(String id);
 }

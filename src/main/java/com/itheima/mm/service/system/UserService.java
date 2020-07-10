@@ -2,6 +2,7 @@ package com.itheima.mm.service.system;
 
 import com.github.pagehelper.PageInfo;
 import com.itheima.mm.domain.system.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface UserService {
     User findById(String id);
     
     PageInfo findAll(int page, int size);
+    
+    void updateRole(String userId, String roleId);
 }

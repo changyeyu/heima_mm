@@ -67,4 +67,8 @@
         where user_id = #{id,jdbcType=VARCHAR}
     </update>
 
+    <insert id="updateRole">
+    insert into ss_role_user values(#{userId},#{roleId})
+
+    </insert>
 </mapper>

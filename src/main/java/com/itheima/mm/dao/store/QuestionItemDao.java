@@ -8,8 +8,8 @@ public interface QuestionItemDao {
     
     //insert
     int save(QuestionItem questionItem);
-
-    //update
+    
+    //updatee
     int update(QuestionItem questionItem);
     
     //delete
@@ -19,6 +19,4 @@ public interface QuestionItemDao {
     List<QuestionItem> findAll(String questionId);
     
     QuestionItem findById(String id);
-
-
 }

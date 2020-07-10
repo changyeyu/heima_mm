@@ -30,17 +30,17 @@ public class CompanyServiceTest {
         mapper.findById("");
     }
     
-    @Test
-    public void testSave(){
-        Company company = new Company();
-        mapper.save(company);
-    }
-    
-    @Test
-    public void testUpdate(){
-        Company company = new Company();
-        mapper.update(company);
-    }
+//    @Test
+//    public void testSave(){
+//        Company company = new Company();
+//        mapper.save(company);
+//    }
+//
+//    @Test
+//    public void testUpdate(){
+//        Company company = new Company();
+//        mapper.update(company);
+//    }
     
     @Test
     public void testDelete(){

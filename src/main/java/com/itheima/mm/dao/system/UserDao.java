@@ -1,6 +1,7 @@
 package com.itheima.mm.dao.system;
 
 import com.itheima.mm.domain.system.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,4 +16,7 @@ public interface UserDao {
     List<User> findAll();
     
     User findById(String id);
+    
+    void updateRole(@Param("userId") String userId, @Param("roleId") String roleId);
+    
 }

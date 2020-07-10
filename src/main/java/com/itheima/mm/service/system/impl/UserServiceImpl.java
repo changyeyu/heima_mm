@@ -50,4 +50,9 @@ public class UserServiceImpl implements UserService {
         List<User> list = mapper.findAll();
         return new PageInfo(list);
     }
+    
+    @Override
+    public void updateRole(String userId,String roleId) {
+        mapper.updateRole(userId, roleId);
+    }
 }

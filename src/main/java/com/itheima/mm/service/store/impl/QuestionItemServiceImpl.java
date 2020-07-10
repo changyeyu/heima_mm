@@ -48,4 +48,13 @@ public class QuestionItemServiceImpl implements QuestionItemService {
         List<QuestionItem> list = mapper.findAll(questionId);
         return new PageInfo(list);
     }
+    
+    @Override
+    public void deleteByQuestionId(String id) {
+        List<QuestionItem> all = mapper.findAll(id);
+        for (QuestionItem questionItem : all) {
+            String questionItemId = questionItem.getId();
+            mapper.delete(questionItemId);
+        }
+    }
 }

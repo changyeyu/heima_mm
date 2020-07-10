@@ -4,25 +4,29 @@ import com.github.pagehelper.PageInfo;
 import com.itheima.mm.domain.store.Catalog;
 import com.itheima.mm.domain.store.Company;
 import com.itheima.mm.domain.store.Question;
+import com.itheima.mm.domain.store.QuestionItem;
 import com.itheima.mm.service.store.QuestionService;
 import com.itheima.mm.service.store.impl.CatalogServiceImpl;
 import com.itheima.mm.service.store.impl.CompanyServiceImpl;
+import com.itheima.mm.service.store.impl.QuestionItemServiceImpl;
 import com.itheima.mm.service.store.impl.QuestionServiceImpl;
 import com.itheima.mm.util.BeanUtil;
 import com.itheima.mm.web.controller.BaseServlet;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUpload;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 @WebServlet("/store/question")
@@ -134,9 +138,23 @@ public class QuestionServlet extends BaseServlet {
     private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String idStr = request.getParameter("id");
         String[] arr = idStr.split("_");
+        QuestionItemServiceImpl questionItemService = new QuestionItemServiceImpl();
         for (String id : arr) {
+            questionItemService.deleteByQuestionId(id);
             service.delete(id);
         }
         list(request, response);
+    }
+    
+    private void toExport(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8");
+        String filename = new String("试题.xlsx".getBytes(), "iso8859-1");
+        response.setHeader("Content-Disposition","attachment;filename=" + filename);
+        ByteArrayOutputStream out = service.getReport();
+        ServletOutputStream responseOutputStream = response.getOutputStream();
+        out.writeTo(responseOutputStream);
+        responseOutputStream.flush();
+        out.close();
+        responseOutputStream.close();
     }
 }
