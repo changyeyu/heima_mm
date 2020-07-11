@@ -118,19 +118,31 @@ public class UserServlet extends BaseServlet {
             StringBuilder moduleStr = new StringBuilder();
             for (Module module : moduleList) {
                 moduleStr.append(module.getCurl());
+                moduleStr.append(",");
             }
             request.getSession().setAttribute("loginUser", user);
             request.getSession().setAttribute("moduleStr", moduleStr);
+            request.getSession().setAttribute("modules", moduleList);
             request.getRequestDispatcher("/WEB-INF/pages/home/main.jsp").forward(request, response);
         } else {
             request.setAttribute("error", "登录失败，请检查用户名或密码");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            
+        }
+    }
+    
+    private void islogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        Object loginUser = request.getSession().getAttribute("loginUser");
+        if (loginUser == null)
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+        else {
+            request.getRequestDispatcher("/WEB-INF/pages/home/home.jsp").forward(request, response);
         }
     }
     
     private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.getSession().removeAttribute("loginUser");
-        response.sendRedirect( request.getContextPath() + "/login.jsp");
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
     
     private void home(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

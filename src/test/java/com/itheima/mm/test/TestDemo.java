@@ -18,9 +18,7 @@ public class TestDemo {
     
     @Test
     public void testSplit(){
-        String s = "1,2,";
-        String[] split = s.split(",");
-        System.out.println(split.length);
+        System.out.println("12121");
     }
 //
 //    @Test
