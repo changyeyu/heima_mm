@@ -73,8 +73,8 @@ public class QuestionServiceImpl implements QuestionService {
     
     @Override
     public ByteArrayOutputStream getReport() throws Exception {
-    
-        Connection connection = DriverManager.getConnection("jdbc:mysql:///heima_mm","root","root");
+        
+        Connection connection = DriverManager.getConnection("jdbc:mysql:///heima_mm", "root", "root");
         PreparedStatement statement = connection.prepareStatement("select * from st_question");
         ResultSet resultSet = statement.executeQuery();
         ResultSetMetaData metaData = resultSet.getMetaData();
@@ -83,11 +83,11 @@ public class QuestionServiceImpl implements QuestionService {
         Workbook wb = new XSSFWorkbook();
         Sheet sheet = wb.createSheet(tableName);
         //设置标题
-        sheet.addMergedRegion(new CellRangeAddress(0,0,0,count-1));
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, count - 1));
         CellStyle cs_title = wb.createCellStyle();
         cs_title.setAlignment(HorizontalAlignment.CENTER);//水平居中
         cs_title.setVerticalAlignment(VerticalAlignment.CENTER);//垂直居中
-    
+        
         int num = 0;
         Row row_0 = sheet.createRow(num++);
         Cell cell_0 = row_0.createCell(0);
@@ -95,11 +95,11 @@ public class QuestionServiceImpl implements QuestionService {
         cell_0.setCellStyle(cs_title);
         //设置列名
         Row row_1 = sheet.createRow(num++);
-    
-        for (int i = 1; i <= count; i++) {
-            sheet.setColumnWidth(i-1,18*256);
         
-            Cell cell_1 = row_1.createCell(i-1);
+        for (int i = 1; i <= count; i++) {
+            sheet.setColumnWidth(i - 1, 18 * 256);
+            
+            Cell cell_1 = row_1.createCell(i - 1);
             String columnName = metaData.getColumnName(i);
             cell_1.setCellValue(columnName);
             CellStyle cs_column = wb.createCellStyle();
@@ -110,9 +110,9 @@ public class QuestionServiceImpl implements QuestionService {
         while (resultSet.next()) {
             Row row_temp = sheet.createRow(num++);
             for (int j = 1; j <= count; j++) {
-                Cell cell_temp = row_temp.createCell(j-1);
+                Cell cell_temp = row_temp.createCell(j - 1);
                 Object s = resultSet.getObject(j);
-                if (s !=null){
+                if (s != null) {
                     cell_temp.setCellValue(s.toString());
                 }
                 CellStyle cs_filed = wb.createCellStyle();

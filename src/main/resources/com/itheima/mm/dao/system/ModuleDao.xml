@@ -14,7 +14,7 @@
             property="module"
             javaType="module"
             column="parent_id"
-            select="com.itheima.dao.mm.system.ModuleDao.findById"
+            select="com.itheima.mm.dao.system.ModuleDao.findById"
             />
     </resultMap>
 
@@ -76,4 +76,13 @@
             FROM ss_module;
     </select>
 
+
+    <select id="findModulesByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select distinct
+        m.module_id, m.parent_id, m.name, m.ctype, m.state, m.curl, m.remark
+        from ss_module m, ss_role_module rm, ss_role_user ru
+        where ru.user_id = #{id,jdbcType=VARCHAR}
+        and ru.role_id = rm.role_id
+        and rm.module_id = m.module_id
+    </select>
 </mapper>

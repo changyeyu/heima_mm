@@ -24,7 +24,7 @@
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="#tab-form" data-toggle="tab">编辑角色</a>
+                            <a href="#tab-form" data-toggle="tab">添加角色</a>
                         </li>
                     </ul>
                     <div class="tab-content">

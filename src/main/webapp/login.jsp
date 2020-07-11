@@ -29,9 +29,9 @@
     <div class="login-box-body">
         <p class="login-box-msg">登录系统</p>
         <%--<form action="${pageContext.request.contextPath}/login?operation=login" method="post">--%>
-        <form action="${pageContext.request.contextPath}/pages/home/main.jsp" method="post">
+        <form action="${pageContext.request.contextPath}/system/user?operation=login" method="post">
             <div class="form-group has-feedback">
-                <input type="email" name="email" class="form-control" placeholder="Email" value="test@itcast.cn">
+                <input type="email" name="email" class="form-control" placeholder="Email" value="${loginUser.email}">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
-                        <label class="">${error}</label>
+                        <label class=""><font color="red">${error}</font></label>
                     </div>
                 </div>
                 <div class="col-xs-4">
@@ -66,6 +66,8 @@
             radioClass: 'iradio_square-blue',
             increaseArea: '20%' // optional
         });
+
+
     });
 </script>
 </body>

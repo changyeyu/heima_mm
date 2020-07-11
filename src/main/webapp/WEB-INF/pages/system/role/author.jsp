@@ -66,7 +66,7 @@
             //1,2,3,4,5     1+","+2+","+3.....
             //数据的临时存储数组，为了方便内容连接成为一个由逗号分隔的字符串
             var moduleArrays = [];
-            for(var i=0;i<nodes.length;i++) {
+            for(var i=0; i<nodes.length;i++) {
                 moduleArrays.push(nodes[i].id);
             }
             //3.将数组中的数据使用,连接后，赋值给表单，传入后台

@@ -13,7 +13,8 @@
         <result column="birthday" jdbcType="VARCHAR" property="birthday"/>
         <result column="join_date" jdbcType="VARCHAR" property="joinDate"/>-->
         <result column="dept_id" jdbcType="VARCHAR" property="deptId"/>
-        <association property="dept" column="dept_id" javaType="dept" select="com.itheima.mm.dao.system.DeptDao.findById"></association>
+        <association property="dept" column="dept_id" javaType="dept"
+                     select="com.itheima.mm.dao.system.DeptDao.findById"></association>
     </resultMap>
 
     <!--配置查询的列名公共SQL语句-->
@@ -67,8 +68,16 @@
         where user_id = #{id,jdbcType=VARCHAR}
     </update>
 
-    <insert id="updateRole">
+    <insert id="updateRole" parameterType="map">
     insert into ss_role_user values(#{userId},#{roleId})
-
     </insert>
+
+    <!--多个参数使用map作为参数类型-->
+    <select id="findByEmailAndPwd" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ss_user
+        where email = #{email,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+    </select>
+
 </mapper>

@@ -16,6 +16,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
@@ -108,8 +109,9 @@ public class QuestionServlet extends BaseServlet {
     }
     
     private void edit(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        
-        FileUpload fileUpload = new FileUpload(new DiskFileItemFactory());
+    
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        FileUpload fileUpload = new FileUpload(factory);
         //获取表单中所有字段
         List<FileItem> list = fileUpload.parseRequest(request);
         boolean flag = false;

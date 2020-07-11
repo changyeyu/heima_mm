@@ -21,7 +21,7 @@ public class QuestionItemServlet extends BaseServlet {
     private void list(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String questionId = request.getParameter("questionId");
         request.setAttribute("questionId", questionId);
-        PageInfo pageInfo = service.findAll(questionId, 1, 20);
+        PageInfo pageInfo = service.findAll(questionId, 1, 50);
         request.setAttribute("page", pageInfo);
         request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/pages/store/questionItem/list.jsp").forward(request, response);
     }

@@ -104,11 +104,11 @@ public class RoleServlet extends BaseServlet {
         
         String moduleIdStr = request.getParameter("moduleIds");
         String[] moduleIds = moduleIdStr.split(",");
-        for (String moduleId : moduleIds) {
-            service.saveRoleModule(roleId, moduleId);
+        if (moduleIds.length > 0 && !"".equals(moduleIds[0])) {
+            for (String moduleId : moduleIds) {
+                service.saveRoleModule(roleId, moduleId);
+            }
         }
         list(request, response);
     }
-    
-    
 }

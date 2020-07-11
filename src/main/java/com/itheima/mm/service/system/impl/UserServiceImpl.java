@@ -2,12 +2,15 @@ package com.itheima.mm.service.system.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.itheima.mm.dao.system.ModuleDao;
 import com.itheima.mm.dao.system.UserDao;
+import com.itheima.mm.domain.system.Module;
 import com.itheima.mm.domain.system.User;
 import com.itheima.mm.service.system.UserService;
 import com.itheima.mm.util.DaoInstanceUtil;
 import com.itheima.mm.util.MD5Util;
 
+import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,5 +57,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateRole(String userId,String roleId) {
         mapper.updateRole(userId, roleId);
+    }
+    
+    @Override
+    public User login(String email, String password) {
+        String pwd = MD5Util.md5(password);
+        return mapper.findByEmailAndPwd(email, pwd);
+    }
+    
+    @Override
+    public List<Module> findModulesById(String id) {
+        ModuleDao moduleDao = DaoInstanceUtil.getMapper(ModuleDao.class);
+        return moduleDao.findModulesByUserId(id);
     }
 }
