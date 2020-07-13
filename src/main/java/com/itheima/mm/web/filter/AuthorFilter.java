@@ -32,9 +32,15 @@ public class AuthorFilter implements Filter {
             request = (HttpServletRequest) req;
             response = (HttpServletResponse) resp;
             String uri = request.getRequestURI();// system/user
-            if ("/".equals(uri) || uri.endsWith(".js") || uri.endsWith(".css") || uri.endsWith("login.jsp")
-                    || uri.endsWith("index.jsp") || uri.endsWith(".jpg") || uri.endsWith(".png")
-                    || uri.endsWith("unauthorized.jsp") || uri.endsWith("home.jsp")
+            if ("/".equals(uri)
+                    || uri.endsWith(".js")
+                    || uri.endsWith(".css")
+                    || uri.endsWith("login.jsp")
+                    || uri.endsWith("index.jsp")
+                    || uri.endsWith(".jpg")
+                    || uri.endsWith(".png")
+                    || uri.endsWith("unauthorized.jsp")
+                    || uri.endsWith("home.jsp")
             ) {
                 chain.doFilter(request, response);
                 return;
@@ -52,11 +58,16 @@ public class AuthorFilter implements Filter {
             
             uri = uri + "?" + queryString;
             
-            if (uri.endsWith("login") || uri.endsWith("logout") || uri.endsWith("home") ) {
+            if (uri.endsWith("login")
+                    || uri.endsWith("logout")
+                    || uri.endsWith("home")
+            ) {
                 chain.doFilter(request, response);
                 return;
             }
+            
             Object moduleStr1 = request.getSession().getAttribute("moduleStr");
+            
             String moduleStr = moduleStr1.toString();
             System.out.println(moduleStr);
             if (moduleStr.contains(uri)) {
